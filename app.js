@@ -16,32 +16,38 @@ function Photos(name, path, alt){
   allPhotos.push(this);
 }
 function populateImages() {
-  var randomx = Math.floor(Math.random() * 20);
-  var randomy = Math.floor(Math.random() * 20);
-  var randomz = Math.floor(Math.random() * 20);
-  if(randomx !== randomy && randomy !== randomz) {
-    // console.log(randomx);
-    // console.log(randomy);
-    // console.log(randomz);
+  //gen random numbers
+  var x = Math.floor(Math.random() * allPhotos.length);
+  var y = Math.floor(Math.random() * allPhotos.length);
+  var z = Math.floor(Math.random() * allPhotos.length);
+  if(x !== y && x !== z && y !== z ) {
+    var x2 = x;
+    var y2 = y;
+    var z2 = z;
+    left.src = allPhotos[x].path;
+    middle.src = allPhotos[y].path;
+    right.src = allPhotos[z].path;
+  }
+  function checkPrevNum() {
+    var chk = populateImages();
+    if (x2 == x && y2 == y && z2 == z) {
+      populateImages()
+    }
 
-    left.src = allPhotos[randomx].path;
-    middle.src = allPhotos[randomy].path;
-    right.src = allPhotos[randomz].path;
   }
 }
 
 function HandleClick(event) {
-  event.preventDefault();
-
+  // event.preventDefault();
   if(event.target.id === 'container') {
     alert('You have to click on an image!');
   } else {
     if(chances < 25) {
-      populateImages();
       console.log(event.target.id);
       chances += 1;
       console.log(chances);
       console.log(event.target.src);
+      populateImages();
     } else {
       container.removeEventListener('click', HandleClick);
     }
