@@ -19,10 +19,15 @@ function populateImages() {
   var randomx = Math.floor(Math.random() * 20);
   var randomy = Math.floor(Math.random() * 20);
   var randomz = Math.floor(Math.random() * 20);
+  if(randomx !== randomy && randomy !== randomz) {
+    // console.log(randomx);
+    // console.log(randomy);
+    // console.log(randomz);
 
-  left.src = allPhotos[randomx].path;
-  middle.src = allPhotos[randomy].path;
-  right.src = allPhotos[randomz].path;
+    left.src = allPhotos[randomx].path;
+    middle.src = allPhotos[randomy].path;
+    right.src = allPhotos[randomz].path;
+  }
 }
 
 function HandleClick(event) {
@@ -31,12 +36,16 @@ function HandleClick(event) {
   if(event.target.id === 'container') {
     alert('You have to click on an image!');
   } else {
-    console.log(event.target.id);
-    chances += 1;
-    console.log(chances);
-    console.log(event.target.src);
+    if(chances < 25) {
+      populateImages();
+      console.log(event.target.id);
+      chances += 1;
+      console.log(chances);
+      console.log(event.target.src);
+    } else {
+      container.removeEventListener('click', HandleClick);
+    }
   }
-  if (event.target.src === allPhotos[])
 }
 
 new Photos('r2d2', 'images/bag.jpg');
@@ -63,4 +72,5 @@ new Photos('sweep', 'images/sweep.jpg');
 
 
 populateImages();
+
 container.addEventListener('click',HandleClick);
