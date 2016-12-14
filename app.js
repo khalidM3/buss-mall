@@ -1,82 +1,147 @@
 'use strict';
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//               UNIVERSAL VARIABLES
+
 var chances = 0;
 var allPhotos = [];
 var container = document.getElementById('container');
 var left = document.getElementById('left');
 var middle = document.getElementById('middle');
 var right = document.getElementById('right');
+var newArray = [];
+var oldArray = [];
 
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                     NEW PHOTOS OBJECT CONSRUCTER
+// this constructs the images used in the app
 
-function Photos(name, path, alt){
+function Photos(name){
   this.name = name;
-  this.path = path;
-  this.alt = alt;
+  this.alt = name;
+  this.path = 'images/'+ name +'.jpg';
   this.clicks = 0;
-  this.displayed = 0;
+  this.views = 0;
   allPhotos.push(this);
 }
-function populateImages() {
-  //gen random numbers
-  var x = Math.floor(Math.random() * allPhotos.length);
-  var y = Math.floor(Math.random() * allPhotos.length);
-  var z = Math.floor(Math.random() * allPhotos.length);
-  if(x !== y && x !== z && y !== z ) {
-    var x2 = x;
-    var y2 = y;
-    var z2 = z;
-    left.src = allPhotos[x].path;
-    middle.src = allPhotos[y].path;
-    right.src = allPhotos[z].path;
-  }
-  function checkPrevNum() {
-    var chk = populateImages();
-    if (x2 == x && y2 == y && z2 == z) {
-      populateImages()
-    }
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                   GENERATES A RANDOM NUMBER
+// this makes a randomm number
+function rand() {
+  return Math.floor(Math.random() * allPhotos.length);
+}
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                  GENERATE 3 RANDOM NON DUPLICATE NUMBERS
+// this makes three random numbers that are not the same in one array and not the
+// same as the three before it and the three after it.
+function makeArrayOfThree() {
+  oldArray[0] = newArray[0];
+  oldArray[1] = newArray[1];
+  oldArray[2] = newArray[2];
 
+  newArray[0] = rand();
+  while(newArray[0] === oldArray[0] || newArray[0] === oldArray[1]||newArray[0] === oldArray[2]){
+    newArray[0] = rand();
+  }
+  newArray[1] = rand();
+  while(newArray[1] === newArray[0] || newArray[1] === oldArray[0] || newArray[1] === oldArray[1]|| newArray[1] === oldArray[2]) {
+    newArray[1] = rand();
+  }
+  newArray[2] = rand();
+  while (newArray[2] === newArray[0] || newArray[2] === newArray[1] || newArray[2] === oldArray[0] || newArray[2] === oldArray[1] || newArray[2] === oldArray[2]){
+    newArray[2] = rand();
   }
 }
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                    RENDERS RANDOM IMAGES TO THE SCREEN
+
+function populateImages() {
+  makeArrayOfThree();
+  console.log('================');
+  left.src = allPhotos[newArray[0]].path;
+  left.alt = allPhotos[newArray[0]].alt;
+  allPhotos[newArray[0]].views += 1;
+  // console.log('name: '+ allPhotos[newArray[0]].name );
+  // console.log('views: '+ allPhotos[newArray[0]].views);
+  // console.log('path: '+ allPhotos[newArray[0]].path);
+  // console.log('clicks: '+ allPhotos[newArray[0]].clicks);
+  // console.log('++++++++++++++++++');
+
+  middle.src = allPhotos[newArray[1]].path;
+  middle.alt = allPhotos[newArray[1]].alt
+  allPhotos[newArray[1]].views += 1;
+  // console.log('name: '+allPhotos[newArray[1]].name );
+  // console.log('views: '+allPhotos[newArray[1]].views);
+  // console.log('path: '+allPhotos[newArray[1]].path);
+  // console.log('clicks: '+allPhotos[newArray[1]].clicks);
+  // console.log('+++++++++++++++++');
+
+  right.src = allPhotos[newArray[2]].path;
+  right.alt = allPhotos[newArray[2]].alt;
+  allPhotos[newArray[2]].views += 1;
+  // console.log('name: '+allPhotos[newArray[2]].name );
+  // console.log('views: '+allPhotos[newArray[2]].views);
+  // console.log('path: '+allPhotos[newArray[2]].path);
+  // console.log('clicks: '+allPhotos[newArray[2]].clicks);
+  // console.log('====================');
+}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                   EVENT HANDLER
 
 function HandleClick(event) {
   // event.preventDefault();
   if(event.target.id === 'container') {
     alert('You have to click on an image!');
+
   } else {
-    if(chances < 25) {
-      console.log(event.target.id);
+    if(chances <= 25) {
+      // console.log(event.target.id);
+      for(var i = 0; i < allPhotos.length; i++) {
+        if(event.target.alt === allPhotos[i].alt) {
+          allPhotos[i].clicks += 1;
+        }
+      }
       chances += 1;
-      console.log(chances);
-      console.log(event.target.src);
-      populateImages();
+      console.log(event.target.id);
+      populateImages();// CALLS THIS FUNCTION FOR THE SECOND TIME
     } else {
       container.removeEventListener('click', HandleClick);
     }
   }
 }
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                 CALL THE PHOTO OBJECTS
 
-new Photos('r2d2', 'images/bag.jpg');
-new Photos('banana', 'images/banana.jpg');
-new Photos('bathroom', 'images/bathroom.jpg');
-new Photos('boots', 'images/boots.jpg');
-new Photos('breakfast', 'images/breakfast.jpg');
-new Photos('bubblegum', 'images/bubblegum.jpg');
-new Photos('chair', 'images/chair.jpg');
-new Photos('toydragon', 'images/dragon.jpg');
-new Photos('dog', 'images/dog-duck.jpg');
-new Photos('dragon meat', 'images/dragon.jpg');
-new Photos('pen', 'images/pen.jpg');
-new Photos('pet sweeper', 'images/pet-sweep.jpg');
-new Photos('scissors', 'images/scissors.jpg');
-new Photos('tauntaun', 'images/tauntaun.jpg');
-new Photos('tentacles', 'images/tentacles.jpg');
-new Photos('unicorn meat', 'images/unicorn.jpg');
-new Photos('water can', 'images/water-can.jpg');
-new Photos('wine glass', 'images/wine-glass.jpg');
-new Photos('shark', 'images/shark.jpg');
-new Photos('sweep', 'images/sweep.jpg');
+new Photos('bag');
+new Photos('banana');
+new Photos('bathroom');
+new Photos('boots');
+new Photos('breakfast');
+new Photos('bubblegum');
+new Photos('chair');
+new Photos('cthulhu');
+new Photos('dog-duck');
+new Photos('dragon');
+new Photos('pen');
+new Photos('pet-sweep');
+new Photos('scissors');
+new Photos('tauntaun');
+new Photos('tentacles');
+new Photos('unicorn');
+new Photos('water-can');
+new Photos('wine-glass');
+new Photos('shark');
+new Photos('sweep');
 
 
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//       CALLS THE IMAGE RENDERING FUNCTION FOR THE FIRST TIME
 
 populateImages();
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                EVENT LISTENER
 
 container.addEventListener('click',HandleClick);
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                           THE END
