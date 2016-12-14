@@ -90,6 +90,7 @@ function populateImages() {
 
 function HandleClick(event) {
   // event.preventDefault();
+  // console.log(event.target.alt);
   if(event.target.id === 'container') {
     alert('You have to click on an image!');
 
@@ -102,36 +103,43 @@ function HandleClick(event) {
         }
       }
       chances += 1;
-      console.log(event.target.id);
+      // console.log(event.target.id);
       populateImages();// CALLS THIS FUNCTION FOR THE SECOND TIME
     } else {
       container.removeEventListener('click', HandleClick);
     }
+
   }
+  localStorage.setItem('allPhotos', JSON.stringify(allPhotos));
+  localStorage.setItem('chances', JSON.stringify(chances));
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                 CALL THE PHOTO OBJECTS
 
-new Photos('bag');
-new Photos('banana');
-new Photos('bathroom');
-new Photos('boots');
-new Photos('breakfast');
-new Photos('bubblegum');
-new Photos('chair');
-new Photos('cthulhu');
-new Photos('dog-duck');
-new Photos('dragon');
-new Photos('pen');
-new Photos('pet-sweep');
-new Photos('scissors');
-new Photos('tauntaun');
-new Photos('tentacles');
-new Photos('unicorn');
-new Photos('water-can');
-new Photos('wine-glass');
-new Photos('shark');
-new Photos('sweep');
+// new Photos('bag');
+// new Photos('banana');
+// new Photos('bathroom');
+// new Photos('boots');
+// new Photos('breakfast');
+// new Photos('bubblegum');
+// new Photos('chair');
+// new Photos('cthulhu');
+// new Photos('dog-duck');
+// new Photos('dragon');
+// new Photos('pen');
+// new Photos('pet-sweep');
+// new Photos('scissors');
+// new Photos('tauntaun');
+// new Photos('tentacles');
+// new Photos('unicorn');
+// new Photos('water-can');
+// new Photos('wine-glass');
+// new Photos('shark');
+// new Photos('sweep');
+
+
+
+
 
 // function makeChart() {
 //   var ctx = document.getElementById("chart").getContext('2d');
@@ -173,6 +181,37 @@ new Photos('sweep');
 //
 //
 // makeChart();
+
+if (localStorage.allPhotos) {
+  allPhotos = JSON.parse(localStorage.allPhotos);
+} else {
+  new Photos('bag');
+  new Photos('banana');
+  new Photos('bathroom');
+  new Photos('boots');
+  new Photos('breakfast');
+  new Photos('bubblegum');
+  new Photos('chair');
+  new Photos('cthulhu');
+  new Photos('dog-duck');
+  new Photos('dragon');
+  new Photos('pen');
+  new Photos('pet-sweep');
+  new Photos('scissors');
+  new Photos('tauntaun');
+  new Photos('tentacles');
+  new Photos('unicorn');
+  new Photos('water-can');
+  new Photos('wine-glass');
+  new Photos('shark');
+  new Photos('sweep');
+
+
+  var allPhotosStringified = JSON.stringify(allPhotos);
+  localStorage.setItem('allPhotos', allPhotosStringified);
+}
+
+
 
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
