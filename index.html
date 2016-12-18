@@ -5,23 +5,28 @@
     <title></title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
-  </head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js" charset="utf-8"></script>
+    </head>
   <body>
-    <section>
+    <article>
+     <h1>Products</h1>
+     <p>Look at the products bellow and click the one you would buy!</p>
+   </article>
+    <section id="container">
 
+        <img id="left" src="" alt="">
+        <img id="middle" src="" alt="">
+        <img id="right" src="" alt="">
     </section>
-    <section>
-      <ul id="container">
-        <li><img id="left" src="" alt=""></li>
-        <li><img id="middle" src="" alt=""></li>
-        <li><img id="right" src="" alt=""></li>
-      </ul>
+    <section id="ButtonContainer">
+      <button id="ShowButton"type="button" name="ShowChart">Show votes</button>
+      <button id="HideButton"type="button" name="HideChart">Hide votes</button>
     </section>
-    <section id="">
-      <canvas id="chart" width="300" height="300"></canvas>
+    <section id="ChartSection">
+      <canvas id="chart"></canvas>
     </section>
 
   <script src="app.js" charset="utf-8"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js" charset="utf-8"></script>
+
   </body>
 </html>
