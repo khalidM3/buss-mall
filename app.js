@@ -87,7 +87,8 @@ function populateImages() {
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                   EVENT HANDLER
-
+var listArray = [];
+var nameArray = [];
 function HandleClick(event) {
   // event.preventDefault();
   if(event.target.id === 'container') {
@@ -99,7 +100,19 @@ function HandleClick(event) {
       for(var i = 0; i < allPhotos.length; i++) {
         if(event.target.alt === allPhotos[i].alt) {
           allPhotos[i].clicks += 1;
+          // if (chances == 25) {
+            // for(i = 0; i < allPhotos.length; i++) {
+              // listArray.push('<li>'+ allPhotos[i].name+' got clicked  '+ allPhotos[i].clicks+ ' times</li>');
+            //}
+          // }
+          listArray.push('<li>'+allPhotos[i].name+' '+allPhotos[i].clicks+'</li>');
+          }
         }
+        if (chances == 25) {
+          // for (var i = 0 ;i < allPhotos.length ; i++) {
+            document.getElementById('votelist').innerHTML = listArray;
+            // document.getElementById('votelist').innerHTML = listArray
+          //}
       }
       chances += 1;
       console.log(event.target.id);
@@ -131,7 +144,15 @@ new Photos('unicorn');
 new Photos('water-can');
 new Photos('wine-glass');
 new Photos('shark');
-new Photos('sweep');
+//new Photos('sweep');
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                     MAKE A LIST OF THE VOTES
+// function listMaker() {
+//   for(var i = 0; i < allPhotos.length; i++) {
+//     document.getElementById('votelist').innerHTML = '<li>''allPhotos[i].clicks''</li>';
+//   }
+// }
 
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -1,9 +1,13 @@
 img {
   width: 20%;
 }
-ul li{
+#container li{
   display: inline;
 }
-ul {
+#container {
   background-color: lightblue;
+}
+#votelist{
+  background-color: orange;
+  display: block;
 }
