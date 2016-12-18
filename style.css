@@ -41,3 +41,33 @@ canvas {
 .showingChart {
   display: inline;
 }
+
+#ShowButton {
+  width: 200px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  border: none;
+  margin: 15px 200px;
+  cursor:pointer;
+}
+#ShowButton:hover {
+  background-color: orange;
+  color: black;
+  transition: all 350ms;
+}
+
+#HideButton {
+  width: 200px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  border:none;
+  margin: 15px 200px;
+  cursor:pointer;
+}
+#HideButton:hover {
+  background-color: orange;
+  color: black;
+  transition: all 350ms;
+}

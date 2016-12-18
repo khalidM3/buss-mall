@@ -84,7 +84,7 @@ function populateImages() {
   right.alt = allPhotos[newArray[2]].alt;
   allPhotos[newArray[2]].views += 1;
   // console.log('name: '+allPhotos[newArray[2]].name );
-  // console.log('views: '+allPhotos[newArray [2]].views);
+  // console.log('views: '+allPhotos[newArray[2]].views);
   // console.log('path: '+allPhotos[newArray[2]].path);
   // console.log('clicks: '+allPhotos[newArray[2]].clicks);
   // console.log('====================');
@@ -106,7 +106,7 @@ function HandleClick(event) {
       for(var i = 0; i < allPhotos.length; i++) {
         if(event.target.alt === allPhotos[i].alt) {
           allPhotos[i].clicks += 1;
-          newItemsArray();
+          // newItemsArray();
         }
       }
       chances += 1;
@@ -115,82 +115,81 @@ function HandleClick(event) {
       populateImages();// CALLS THIS FUNCTION FOR THE SECOND TIME
 
     } else if (chances === 25) {
-      makeChart();
-      container.removeEventListener('click', HandleClick);
+      showButtons();
     }else {
       container.removeEventListener('click', HandleClick);
     }
 
   }
-  //localStorage.setItem('allPhotos', JSON.stringify(allPhotos));
-  //localStorage.setItem('chances', JSON.stringify(chances));
+  localStorage.setItem('allPhotos', JSON.stringify(allPhotos));
+  localStorage.setItem('chances', JSON.stringify(chances));
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                 CALL THE PHOTO OBJECTS
 
-new Photos('bag');
-new Photos('banana');
-new Photos('bathroom');
-new Photos('boots');
-new Photos('breakfast');
-new Photos('bubblegum');
-new Photos('chair');
-new Photos('cthulhu');
-new Photos('dog-duck');
-new Photos('dragon');
-new Photos('pen');
-new Photos('pet-sweep');
-new Photos('scissors');
-new Photos('tauntaun');
-new Photos('tentacles');
-new Photos('unicorn');
-new Photos('water-can');
-new Photos('wine-glass');
-new Photos('shark');
-new Photos('sweep');
+// new Photos('bag');
+// new Photos('banana');
+// new Photos('bathroom');
+// new Photos('boots');
+// new Photos('breakfast');
+// new Photos('bubblegum');
+// new Photos('chair');
+// new Photos('cthulhu');
+// new Photos('dog-duck');
+// new Photos('dragon');
+// new Photos('pen');
+// new Photos('pet-sweep');
+// new Photos('scissors');
+// new Photos('tauntaun');
+// new Photos('tentacles');
+// new Photos('unicorn');
+// new Photos('water-can');
+// new Photos('wine-glass');
+// new Photos('shark');
+// new Photos('sweep');
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// if (localStorage.allPhotos) {
-//   allPhotos = JSON.parse(localStorage.allPhotos);
-// } else {
-//   new Photos('bag');
-//   new Photos('banana');
-//   new Photos('bathroom');
-//   new Photos('boots');
-//   new Photos('breakfast');
-//   new Photos('bubblegum');
-//   new Photos('chair');
-//   new Photos('cthulhu');
-//   new Photos('dog-duck');
-//   new Photos('dragon');
-//   new Photos('pen');
-//   new Photos('pet-sweep');
-//   new Photos('scissors');
-//   new Photos('tauntaun');
-//   new Photos('tentacles');
-//   new Photos('unicorn');
-//   new Photos('water-can');
-//   new Photos('wine-glass');
-//   new Photos('shark');
-//   new Photos('sweep');
-//
-//
-//   var allPhotosStringified = JSON.stringify(allPhotos);
-//   localStorage.setItem('allPhotos', allPhotosStringified);
-// }
+if (localStorage.allPhotos) {
+  allPhotos = JSON.parse(localStorage.allPhotos);
+} else {
+  new Photos('bag');
+  new Photos('banana');
+  new Photos('bathroom');
+  new Photos('boots');
+  new Photos('breakfast');
+  new Photos('bubblegum');
+  new Photos('chair');
+  new Photos('cthulhu');
+  new Photos('dog-duck');
+  new Photos('dragon');
+  new Photos('pen');
+  new Photos('pet-sweep');
+  new Photos('scissors');
+  new Photos('tauntaun');
+  new Photos('tentacles');
+  new Photos('unicorn');
+  new Photos('water-can');
+  new Photos('wine-glass');
+  new Photos('shark');
+  new Photos('sweep');
+
+
+  var allPhotosStringified = JSON.stringify(allPhotos);
+  localStorage.setItem('allPhotos', allPhotosStringified);
+}
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 var itemsClicked = [];
 var itemsName = [];
 
 function newItemsArray() {
-  for (var i = 0 ; i < allPhotos.length; i++){
+  for (var i =0; i< allPhotos.length; i++){
     console.log('New items array running');
-    console.log(itemsClicked);
     itemsClicked[i] = allPhotos[i].clicks;
     itemsName[i] = allPhotos[i].name;
   }
 }
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //       CALLS THE IMAGE RENDERING FUNCTION FOR THE FIRST TIME
 
 populateImages();
@@ -202,7 +201,7 @@ container.addEventListener('click',HandleClick);
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function makeChart() {
 
-  console.log('make chart running');
+  console.log('makearray running');
 
   var ctx = document.getElementById('chart').getContext('2d');
   var myChart = new Chart(ctx, {
@@ -230,5 +229,24 @@ function makeChart() {
 newItemsArray();
 makeChart();
 
+function handleShowChart(event) {
+  if (event.target.id === 'ShowButton'){
+    document.getElementById('ChartSection').className = 'showingChart';
+    console.log(event.target.id);
+    console.log('RUUUUUNINGGG!!!!');
+  }
+  if (event.target.id === 'HideButton') {
+    document.getElementById('ChartSection').className = 'hidenChart';
+    console.log(event.target.id);
+    console.log('HIDINGGGGGGGGGGG');
+  }
+}
+function showButtons() {
+  document.getElementById('ButtonContainer').className = 'showingChart'
+}
+
+
+buttonContainer.addEventListener('click', handleShowChart);
+handleShowChart();
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //                           THE END
