@@ -199,6 +199,7 @@ populateImages();
 container.addEventListener('click',HandleClick);
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 function makeChart() {
 
   console.log('makearray running');
@@ -212,7 +213,7 @@ function makeChart() {
       datasets: [ {
         label: 'Product Votes',
         data: itemsClicked,
-        backgroundColor: "rgba(255,153,0,0.6)"
+        backgroundColor: 'rgba(255,153,0,0.6)'
       }]
 
     },
@@ -226,6 +227,7 @@ function makeChart() {
     },
   });
 }
+
 newItemsArray();
 makeChart();
 
