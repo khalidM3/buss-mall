@@ -183,7 +183,7 @@ var itemsName = [];
 
 function newItemsArray() {
   for (var i =0; i< allPhotos.length; i++){
-    console.log('New items array running');
+    // console.log('New items array running');
     itemsClicked[i] = allPhotos[i].clicks;
     itemsName[i] = allPhotos[i].name;
   }
@@ -234,13 +234,13 @@ makeChart();
 function handleShowChart(event) {
   if (event.target.id === 'ShowButton'){
     document.getElementById('ChartSection').className = 'showingChart';
-    console.log(event.target.id);
-    console.log('RUUUUUNINGGG!!!!');
+    // console.log(event.target.id);
+    // console.log('RUUUUUNINGGG!!!!');
   }
   if (event.target.id === 'HideButton') {
     document.getElementById('ChartSection').className = 'hidenChart';
-    console.log(event.target.id);
-    console.log('HIDINGGGGGGGGGGG');
+    // console.log(event.target.id);
+    // console.log('HIDINGGGGGGGGGGG');
   }
 }
 function showButtons() {
