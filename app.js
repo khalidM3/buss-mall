@@ -183,7 +183,9 @@ var itemsName = [];
 
 function newItemsArray() {
   for (var i =0; i< allPhotos.length; i++){
+
     // console.log('New items array running');
+
     itemsClicked[i] = allPhotos[i].clicks;
     itemsName[i] = allPhotos[i].name;
   }
@@ -213,7 +215,7 @@ function makeChart() {
       datasets: [ {
         label: 'Product Votes',
         data: itemsClicked,
-        backgroundColor: 'rgba(255,153,0,0.6)'
+        backgroundColor: "rgba(255,153,0,0.6)"
       }]
 
     },
@@ -234,6 +236,7 @@ makeChart();
 function handleShowChart(event) {
   if (event.target.id === 'ShowButton'){
     document.getElementById('ChartSection').className = 'showingChart';
+
     // console.log(event.target.id);
     // console.log('RUUUUUNINGGG!!!!');
   }
@@ -241,6 +244,7 @@ function handleShowChart(event) {
     document.getElementById('ChartSection').className = 'hidenChart';
     // console.log(event.target.id);
     // console.log('HIDINGGGGGGGGGGG');
+
   }
 }
 function showButtons() {
